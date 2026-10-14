@@ -1,5 +1,5 @@
 import { Link, NavLink, Outlet } from 'react-router-dom';
-import { Avatar, Logo, ButtonLink } from '@/components/ui';
+import { Logo, ButtonLink } from '@/components/ui';
 import { useAuth } from '@/features/auth/AuthContext';
 import { useBranding } from '@/features/branding/BrandingContext';
 import { cn } from '@/lib/cn';
@@ -11,8 +11,10 @@ const links = [
 ];
 
 export function SiteNav() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const { name } = useBranding();
+  if (loading || user) return null;
+
   return (
     <header className="fixed inset-x-4 top-4 z-40 mx-auto max-w-[1216px] rounded-2xl border border-line/70 bg-white/95 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.3)] backdrop-blur-xl md:inset-x-8 md:top-6 print:hidden">
       <div className="flex h-16 items-center justify-between px-4 sm:px-6 md:h-[72px]">
@@ -31,17 +33,8 @@ export function SiteNav() {
           ))}
         </nav>
         <div className="flex items-center gap-4">
-          {user ? (
-            <Link to="/account" className="flex items-center gap-2 text-sm font-semibold text-ink">
-              <Avatar name={user.fullName} />
-              <span className="max-sm:sr-only">{user.fullName.split(' ')[0]}</span>
-            </Link>
-          ) : (
-            <>
-              <Link to="/login" className="hidden text-[15px] font-semibold text-ink hover:text-forest sm:inline">Log in</Link>
-              <ButtonLink to="/signup" variant="accent" size="sm" className="px-5">Sign up</ButtonLink>
-            </>
-          )}
+          <Link to="/login" className="hidden text-[15px] font-semibold text-ink hover:text-forest sm:inline">Log in</Link>
+          <ButtonLink to="/signup" variant="accent" size="sm" className="px-5">Sign up</ButtonLink>
         </div>
       </div>
     </header>
@@ -104,10 +97,11 @@ export function SiteFooter() {
 }
 
 export function PublicLayout() {
+  const { user } = useAuth();
   return (
     <div className="flex min-h-screen flex-col bg-white">
       <SiteNav />
-      <main id="main" tabIndex={-1} className="flex-1 pt-28 focus:outline-none md:pt-32"><Outlet /></main>
+      <main id="main" tabIndex={-1} className={cn('flex-1 focus:outline-none', !user && 'pt-28 md:pt-32')}><Outlet /></main>
       <SiteFooter />
     </div>
   );

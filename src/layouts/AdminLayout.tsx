@@ -93,35 +93,37 @@ export function AdminLayout() {
           </div>
         )}
         <div className="flex min-w-0 flex-1 flex-col">
-          <header className="flex min-h-20 items-center gap-4 border-b border-line bg-white px-4 py-3 sm:px-6 lg:px-10">
-            <button type="button" aria-label="Open menu" onClick={() => setMenuOpen(true)} className="grid size-10 shrink-0 place-items-center rounded-xl border border-line lg:hidden">
-              <Menu size={20} aria-hidden />
-            </button>
-            <div className="min-w-0 flex-1">
-              {/* Until the page sets its title (it may still be loading), name the section so the heading is never empty. */}
-              <h1 className="truncate text-[22px] md:text-[26px]">{title.title || sectionName}</h1>
-              {title.subtitle && <div className="mt-0.5 truncate text-[13px] text-slate md:text-sm">{title.subtitle}</div>}
-            </div>
-            <AdminSearch className="hidden w-[300px] md:block" />
-            <button
-              type="button"
-              aria-label="Search hikers and tickets"
-              aria-expanded={searchOpen}
-              onClick={() => setSearchOpen((o) => !o)}
-              className="grid size-10 shrink-0 place-items-center rounded-xl border border-line md:hidden"
-            >
-              <Search size={18} aria-hidden />
-            </button>
-            <span className="hidden sm:block">
-              <Avatar name={name} />
-            </span>
-          </header>
-          {/* Phones: the search opens in its own row under the top bar. */}
-          {searchOpen && (
-            <div className="border-b border-line bg-white px-4 py-3 md:hidden">
-              <AdminSearch autoFocus onDone={() => setSearchOpen(false)} />
-            </div>
-          )}
+          <div className="sticky top-0 z-40">
+            <header className="flex min-h-20 items-center gap-4 border-b border-line bg-white px-4 py-3 sm:px-6 lg:px-10">
+              <button type="button" aria-label="Open menu" onClick={() => setMenuOpen(true)} className="grid size-10 shrink-0 place-items-center rounded-xl border border-line lg:hidden">
+                <Menu size={20} aria-hidden />
+              </button>
+              <div className="min-w-0 flex-1">
+                {/* Until the page sets its title (it may still be loading), name the section so the heading is never empty. */}
+                <h1 className="truncate text-[22px] md:text-[26px]">{title.title || sectionName}</h1>
+                {title.subtitle && <div className="mt-0.5 truncate text-[13px] text-slate md:text-sm">{title.subtitle}</div>}
+              </div>
+              <AdminSearch className="hidden w-[300px] md:block" />
+              <button
+                type="button"
+                aria-label="Search hikers and tickets"
+                aria-expanded={searchOpen}
+                onClick={() => setSearchOpen((o) => !o)}
+                className="grid size-10 shrink-0 place-items-center rounded-xl border border-line md:hidden"
+              >
+                <Search size={18} aria-hidden />
+              </button>
+              <span className="hidden sm:block">
+                <Avatar name={name} />
+              </span>
+            </header>
+            {/* Phones: the search opens in its own row under the top bar. */}
+            {searchOpen && (
+              <div className="border-b border-line bg-white px-4 py-3 md:hidden">
+                <AdminSearch autoFocus onDone={() => setSearchOpen(false)} />
+              </div>
+            )}
+          </div>
           <main id="main" tabIndex={-1} className="min-w-0 flex-1 focus:outline-none px-4 py-6 sm:px-6 lg:px-10 lg:py-8">
             <Outlet />
           </main>
