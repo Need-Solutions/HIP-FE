@@ -1,0 +1,14 @@
+<svg preserveAspectRatio="xMidYMid slice" width="640" height="900" viewBox="0 0 640 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group">
+<path id="Vector" d="M640 0H0V900H640V0Z" fill="url(#paint0_linear_0_7)"/>
+<path id="Vector_2" opacity="0.9" d="M499.2 327.6C531.012 327.6 556.8 301.812 556.8 270C556.8 238.188 531.012 212.4 499.2 212.4C467.388 212.4 441.6 238.188 441.6 270C441.6 301.812 467.388 327.6 499.2 327.6Z" fill="#FFF4E0"/>
+<path id="Vector_3" d="M0 900L192 342L332.8 558L460.8 270L640 630V900H0Z" fill="#4C7F6A"/>
+<path id="Vector_4" d="M0 900V702L160 558L320 738L512 540L640 720V900H0Z" fill="#23533F"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_7" x1="0" y1="0" x2="0" y2="900" gradientUnits="userSpaceOnUse">
+<stop stop-color="#BFD9E6"/>
+<stop offset="1" stop-color="#7FB0C9"/>
+</linearGradient>
+</defs>
+</svg>

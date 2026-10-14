@@ -1,0 +1,95 @@
+/* Inter, self-hosted (SIL OFL, public/fonts/Inter-OFL.txt). One variable file covers weights 400–800. Latin is
+   preloaded in index.html; latin-ext (which has ₦) downloads only when a page uses those characters. */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/inter-latin-var.woff2') format('woff2-variations'), url('/fonts/inter-latin-var.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/inter-latin-ext-var.woff2') format('woff2-variations'), url('/fonts/inter-latin-ext-var.woff2') format('woff2');
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { font-family: Inter, system-ui, sans-serif; }
+  h1, h2, h3 { @apply font-extrabold tracking-tight text-ink; }
+}
+
+@layer components {
+  .container-page { @apply mx-auto w-full max-w-page px-4 sm:px-6 lg:px-8; }
+  .card { @apply rounded-2xl border border-line bg-white; }
+  .label { @apply mb-1.5 block text-[13px] font-medium text-ink; }
+}
+
+/* react-toastify, themed with the design tokens. Set on the container (not :root) so it wins over the
+   library's own :root defaults, which it injects at runtime. */
+.hip-toasts {
+  --toastify-font-family: Inter, system-ui, sans-serif;
+  --toastify-color-light: theme('colors.white');
+  --toastify-text-color-light: theme('colors.ink');
+  --toastify-color-error: theme('colors.danger.DEFAULT');
+  --toastify-color-success: theme('colors.forest.DEFAULT');
+  --toastify-color-info: theme('colors.info.DEFAULT');
+  --toastify-color-warning: theme('colors.warn.DEFAULT');
+  --toastify-toast-width: 380px;
+  /* The library derives these from the colours above at :root, so they need setting here too. */
+  --toastify-icon-color-error: theme('colors.danger.DEFAULT');
+  --toastify-icon-color-success: theme('colors.forest.DEFAULT');
+  --toastify-icon-color-info: theme('colors.info.DEFAULT');
+  --toastify-icon-color-warning: theme('colors.warn.DEFAULT');
+  --toastify-color-progress-error: theme('colors.danger.DEFAULT');
+  --toastify-color-progress-success: theme('colors.forest.DEFAULT');
+  --toastify-color-progress-info: theme('colors.info.DEFAULT');
+  --toastify-color-progress-warning: theme('colors.warn.DEFAULT');
+  --toastify-color-progress-light: theme('colors.forest.DEFAULT');
+}
+.hip-toasts .Toastify__toast {
+  @apply rounded-xl border border-line text-sm shadow-lg;
+}
+.hip-toasts .Toastify__toast--error {
+  @apply border-l-4 border-l-danger;
+}
+.hip-toasts .Toastify__toast a {
+  @apply font-bold text-forest underline;
+}
+.hip-toasts .Toastify__close-button {
+  @apply text-slate opacity-100;
+}
+.hip-toasts .Toastify__close-button:focus-visible {
+  @apply rounded outline-none ring-2 ring-forest/40;
+}
+
+/* Check-in camera: html5-qrcode injects its own <video>; make it fill the camera area. */
+.hip-qr-reader video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+.hip-qr-reader canvas,
+.hip-qr-reader img {
+  display: none;
+}
+
+/* Scanner: the line sweeps the frame; still for people who prefer reduced motion. */
+@keyframes hip-scan {
+  0%, 100% { top: 8%; }
+  50% { top: 92%; }
+}
+.hip-scanline {
+  top: 50%;
+  animation: hip-scan 2.6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hip-scanline { animation: none; }
+}

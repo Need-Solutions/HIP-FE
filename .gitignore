@@ -1,0 +1,16 @@
+node_modules
+dist
+dev-dist
+.env
+.env.local
+*.log
+.DS_Store
+
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+
+# Videos: only the hero video in use is committed
+src/assets/*.mp4
+!src/assets/hero-video.mp4
