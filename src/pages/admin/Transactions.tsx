@@ -77,7 +77,7 @@ export default function Transactions() {
       [],
       ['Gross ticket sales', money(sm.grossKobo)],
       ['Refunds', money(sm.refundsKobo), `${sm.refundCount} refunds`],
-      ['Paystack fees', money(sm.feesKobo)],
+      // ['Paystack fees', money(sm.feesKobo)],
       ['Net proceeds', money(sm.netKobo)],
       [],
       ['Reference', 'Ticket', 'Hiker', 'Email', 'Event', 'Ticket price', 'Fee', 'Amount charged', 'Date', 'Status', 'Refund amount', 'Refund decision', 'Refund reason'],
@@ -134,15 +134,15 @@ export default function Transactions() {
       <p className="mt-3 text-sm font-semibold text-slate">{range.label}</p>
 
       {isLoading ? (
-        <div className="mt-4 grid grid-cols-2 gap-4 xl:grid-cols-4">{[0, 1, 2, 3].map((i) => <Skeleton key={i} className="h-[124px]" />)}</div>
+        <div className="mt-4 grid grid-cols-2 gap-4 xl:grid-cols-3">{[0, 1, 2, 3].map((i) => <Skeleton key={i} className="h-[124px]" />)}</div>
       ) : !data || !sm ? (
         <EmptyState className="mt-4" icon={Wallet} title="We couldn’t load transactions" body="Check your connection and try again." action={<Button onClick={() => refetch()}>Try again</Button>} />
       ) : (
         <>
-          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
             <StatCard label="Gross ticket sales" value={formatNairaCompact(sm.grossKobo)} {...(g === null ? {} : { delta: formatPercent(Math.abs(g), 0), up: g >= 0 })} sub={range.vsLabel} />
             <StatCard label="Refunds" value={formatNairaCompact(sm.refundsKobo)} sub={`${sm.refundCount} ${sm.refundCount === 1 ? 'refund' : 'refunds'}`} />
-            <StatCard label="Paystack fees" value={formatNairaCompact(sm.feesKobo)} sub="1.5% + ₦100" />
+            {/* <StatCard label="Paystack fees" value={formatNairaCompact(sm.feesKobo)} sub="1.5% + ₦100" /> */}
             <StatCard label="Net proceeds" value={formatNairaCompact(sm.netKobo)} sub={`Pending not counted${sm.pendingCount ? ` (${sm.pendingCount})` : ''}`} />
           </div>
 
